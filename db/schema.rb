@@ -11,37 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140208212204) do
+ActiveRecord::Schema.define(version: 20140208223608) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "movies", force: true do |t|
-    t.string   "title"
-    t.string   "imdb_id"
-    t.string   "person"
-    t.string   "poster_url"
-    t.string   "trailer_url"
-    t.text     "plot"
+  create_table "o_auth2_credentials", force: true do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.string   "signet"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "sessions", force: true do |t|
-    t.string   "session_id", null: false
-    t.text     "data"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true, using: :btree
-  add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
+  add_index "o_auth2_credentials", ["user_id"], name: "index_o_auth2_credentials_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "name"
-    t.string   "email"
-    t.string   "provider"
     t.string   "uid"
+    t.string   "email"
+    t.string   "name"
+    t.string   "surname"
+    t.string   "avatar"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -12,9 +12,11 @@ gem 'figaro'
 gem 'haml-rails'
 gem 'pg'
 gem 'simple_form'
+gem 'google-api-client', :require => 'google/api_client'
+gem 'signet-rails'
 group :development do
   gem 'better_errors'
-  gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :rbx]
+  gem 'binding_of_caller'
   gem 'guard-bundler'
   gem 'guard-rails'
   gem 'guard-rspec'
@@ -36,6 +38,7 @@ group :production do
 end
 group :test do
   gem 'capybara'
+  gem 'shoulda-matchers'
   gem 'database_cleaner', '1.0.1'
   gem 'email_spec'
 end

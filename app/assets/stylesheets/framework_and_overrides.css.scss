@@ -1,6 +1,10 @@
 // import the CSS framework
 @import "bootstrap";
 
+body, html {
+  height: 100%;
+}
+
 // make all images responsive by default
 img {
   @extend .img-responsive;
@@ -30,6 +34,17 @@ img {
   @extend .btn-primary;
   @extend .btn-lg;
   }
+.navbar-image {
+  width: 40px;
+  height: 40px;
+  margin: {
+    top: 5px;
+    right: 15px;
+    bottom: 5px;
+    left: 15px;
+  }
+  float: left;
+}
 // apply styles to HTML elements
 // to make views framework-neutral
 main {
@@ -37,6 +52,7 @@ main {
   background-color: #eee;
   padding-bottom: 80px;
   width: 100%;
+  height: 100%;
   margin-top: 51px; // accommodate the navbar
   }
 section {
