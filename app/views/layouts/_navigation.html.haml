@@ -11,3 +11,13 @@
     .collapse.navbar-collapse
       %ul.nav.navbar-nav
         = render 'layouts/navigation_links'
+
+      .navbar-right
+        - if logged_in?
+          .navbar-text
+            = current_user.full_name
+          = image_tag current_user.avatar, class: ["img-circle", "navbar-image"]
+          = link_to 'Sign out', signout_path, class: ["btn btn-default", "navbar-btn"]
+        - else
+          = link_to '/signet/google/auth', class: ["btn btn-default", "navbar-btn"] do
+            = image_tag 'google_21.png'
