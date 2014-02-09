@@ -4,6 +4,27 @@ class SessionsController < ApplicationController
     session[:user_id] = user.id
     flash[:notice] = 'Signed In!'
 
+    update_user_data(user)
+    redirect_to root_url
+  end
+
+  def destroy
+    session[:user_id] = nil
+    flash[:notice] = 'Signed Out'
+    redirect_to root_url
+  end
+
+private
+
+  def update_user_data(user)
+    data = get_user_data
+    user.update_attributes  email: data['email'],
+                            name: data['given_name'],
+                            surname: data['family_name'],
+                            avatar: data['picture']
+  end
+
+  def get_user_data
     auth = Signet::Rails::Factory.create_from_env :google, request.env
     client = Google::APIClient.new
     client.authorization = auth
@@ -13,19 +34,9 @@ class SessionsController < ApplicationController
       :parameters => {},
       :headers => {'Content-Type' => 'application/json'}
     )
-    data = JSON.parse(result.body)
-    user.update_attributes  email: data['email'],
-                            name: data['given_name'],
-                            surname: data['family_name'],
-                            avatar: data['picture']
-
-
-    redirect_to root_url
+    JSON.parse(result.body)
   end
 
-  def destroy
-    session[:user_id] = nil
-    flash[:notice] = 'Signed Out'
-    redirect_to root_url
-  end
+
+
 end
