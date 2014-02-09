@@ -7,6 +7,10 @@ class Movie < ActiveRecord::Base
 
   before_save :get_data_from_imdb
 
+  def imdb_link
+    "http://www.imdb.com/title/#{self.imdb_id}/"
+  end
+
 private
 
   def get_data_from_imdb

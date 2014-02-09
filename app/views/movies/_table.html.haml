@@ -1,0 +1,11 @@
+.table-responsive
+  %table.table.table-striped.table-hover
+    %thead
+      %tr
+        %th= "Title"
+        %th= "Year"
+        %th= "Proposed by"
+        %th
+
+    %tbody
+      = render partial: "/movies/row", collection: movies, as: :movie
