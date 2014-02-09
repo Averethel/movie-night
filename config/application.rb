@@ -8,14 +8,14 @@ Bundler.require(:default, Rails.env)
 
 module MovieNight
   class Application < Rails::Application
+    I18n.config.enforce_available_locales = true
 
     # don't generate RSpec tests for views and helpers
     config.generators do |g|
-      
+
       g.test_framework :rspec, fixture: true
       g.fixture_replacement :factory_girl, dir: 'spec/factories'
-      
-      
+
       g.view_specs false
       g.helper_specs false
     end
