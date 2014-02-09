@@ -1,6 +1,8 @@
 Movie Night
 =========
 
+[![Code Climate](https://codeclimate.com/github/Averethel/movie-night.png)](https://codeclimate.com/github/Averethel/movie-night)
+[![Build Status](https://travis-ci.org/Averethel/movie-night.png?branch=develop)](https://travis-ci.org/Averethel/movie-night)
 
 This application requires:
 
