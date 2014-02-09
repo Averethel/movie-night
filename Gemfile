@@ -15,6 +15,7 @@ gem 'simple_form'
 gem 'google-api-client', :require => 'google/api_client'
 gem 'signet-rails'
 gem 'imdb_party'
+gem 'font-awesome-rails'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
