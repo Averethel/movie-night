@@ -1,0 +1,8 @@
+language: ruby
+rvm:
+  - 2.1.0
+script:
+  - RAILS_ENV=test bundle exec rake --trace db:migrate test
+before_script:
+  - cp config/database.travis.yml config/database.yml
+  - psql -c 'create database movie-night_test' -U postgres
