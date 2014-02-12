@@ -15,7 +15,7 @@
           .tab-pane.active{ id: "movie-#{movie.id}-info" }
             .row
               .col-md-4
-                = image_tag movie.poster_url
+                = image_tag movie.poster_url, class: "poster"
               .col-md-8
                 .row
                   .col-md-2
@@ -44,7 +44,7 @@
 
           .tab-pane{ id: "movie-#{movie.id}-trailer" }
             .text-center
-              %video{ controls: true }
+              %video.trailer{ controls: true }
                 %source{ src: movie.trailer_url }
 
       .modal-footer

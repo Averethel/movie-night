@@ -7,6 +7,7 @@ FactoryGirl.define do
   factory :movie do
     title { generate(:title) }
     imdb_id { generate(:imdb_id) }
+    year 2008
     tagline "Some tagline"
     plot "Plot summary"
     genres ["genre1", "genre2"]

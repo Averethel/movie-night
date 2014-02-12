@@ -1,6 +1,6 @@
 = render partial: "/movies/info", locals: {movie: movie}
 
-%tr
+%tr{id: "movie-#{movie.id}"}
   %td
     %div= movie.title
     %small= movie.tagline
