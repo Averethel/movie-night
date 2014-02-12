@@ -4,5 +4,5 @@ MovieNight::Application.routes.draw do
 
   root to: 'home#index'
 
-  resources :movies
+  resources :movies, except: [:edit, :update, :destroy]
 end
