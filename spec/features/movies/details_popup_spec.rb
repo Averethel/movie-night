@@ -40,7 +40,9 @@ feature "Movie details popup", js: true do
   end
 
   scenario "includes movie trailer" do
-    click_link "Trailer"
+    within(index_page.details_popup_for(@movie)) do
+      click_link "Trailer"
+    end
 
     expect(index_page.details_popup_for(@movie)).to have_css("video.trailer")
   end

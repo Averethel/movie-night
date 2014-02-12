@@ -1,4 +1,4 @@
-%table.table.table-striped
+%table.table.table-striped#imdb-suggestions
   %thead
     %tr
       %th= "Title"
@@ -7,7 +7,7 @@
 
   %tbody
     - @movies.each do |movie|
-      %tr
+      %tr{ id: movie[:imdb_id] }
         %td= movie[:title]
         %td= movie[:year][0]
         %td

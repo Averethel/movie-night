@@ -18,7 +18,7 @@ describe MoviesController do
     end
 
     it "assigns movies" do
-      assigns(:movies).should eq([@movie1, @movie2])
+      assigns(:movies).should eq(Movie.all)
     end
   end
 
