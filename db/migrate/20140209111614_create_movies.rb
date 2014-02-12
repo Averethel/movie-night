@@ -6,8 +6,8 @@ class CreateMovies < ActiveRecord::Migration
       t.string :tagline
       t.text :plot
       t.text :genres
-      t.string :poster_url
-      t.string :trailer_url
+      t.text :poster_url
+      t.text :trailer_url
       t.integer :year
       t.references :user, index: true
 
