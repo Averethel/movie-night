@@ -35,10 +35,6 @@ class Movie < ActiveRecord::Base
     current_step == steps.last
   end
 
-  def imdb_link
-    "http://www.imdb.com/title/#{self.imdb_id}/"
-  end
-
 private
 
   def get_data_from_imdb

@@ -104,16 +104,4 @@ describe Movie do
       subject.save
     end
   end
-
-  describe '#imdb_link' do
-    subject { build(:movie) }
-
-    it "generates link to imdb page" do
-      expect(subject.imdb_link).to match /^http:\/\/www.imdb.com\/title\//
-    end
-
-    it "uses imdb id in the link" do
-      expect(subject.imdb_link).to include(subject.imdb_id)
-    end
-  end
 end
