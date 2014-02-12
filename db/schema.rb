@@ -11,10 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140208223608) do
+ActiveRecord::Schema.define(version: 20140209111614) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "movies", force: true do |t|
+    t.string   "title"
+    t.string   "imdb_id"
+    t.string   "tagline"
+    t.text     "plot"
+    t.text     "genres"
+    t.text     "poster_url"
+    t.text     "trailer_url"
+    t.integer  "year"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "movies", ["user_id"], name: "index_movies_on_user_id", using: :btree
 
   create_table "o_auth2_credentials", force: true do |t|
     t.string   "name"

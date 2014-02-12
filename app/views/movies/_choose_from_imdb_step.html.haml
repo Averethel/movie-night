@@ -1,0 +1,21 @@
+%table.table.table-striped#imdb-suggestions
+  %thead
+    %tr
+      %th= "Title"
+      %th= "Year"
+      %th
+
+  %tbody
+    - @movies.each do |movie|
+      %tr{ id: movie[:imdb_id] }
+        %td= movie[:title]
+        %td= movie[:year][0]
+        %td
+          = simple_form_for @movie, role: "form", class: "form-horizontal" do |f|
+            = f.input :imdb_id, as: :hidden, input_html: { value: movie[:imdb_id] }
+            = link_to imdb_link_for(movie[:imdb_id]), class: ["btn", "btn-default", "btn-sm"], target: "_blank" do
+              IMDB
+              %i.fa.fa-external-link
+            = f.button :button, type: :submit, class: ["btn", "btn-sm", "btn-primary"] do
+              Add
+              %i.fa.fa-plus

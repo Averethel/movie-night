@@ -1,4 +1,7 @@
 class SessionsController < ApplicationController
+  skip_authorization_check
+  skip_before_filter :prepare_resource
+
   def create
     user = request.env['signet.google.persistence_obj'].user
     session[:user_id] = user.id

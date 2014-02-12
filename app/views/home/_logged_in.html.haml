@@ -1,1 +1,6 @@
 %h1= "Welcome to movie nights #{current_user.full_name}!"
+
+%h3
+  Your movie propositions
+
+= render partial: "/movies/table", locals: { movies: current_user.movies }

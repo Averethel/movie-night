@@ -4,6 +4,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   helper_method :current_user, :logged_in?
+  before_filter :reset_session
+  before_filter :prepare_resource, only: [:create]
+  check_authorization
 
   def current_user
     u = nil
@@ -19,5 +22,15 @@ class ApplicationController < ActionController::Base
 
   def logged_in?
     !!current_user
+  end
+
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_url, alert: exception.message
+  end
+
+private
+
+  def reset_session
+    session[:movie_step] = nil
   end
 end

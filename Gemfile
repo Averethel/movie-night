@@ -14,6 +14,9 @@ gem 'pg'
 gem 'simple_form'
 gem 'google-api-client', :require => 'google/api_client'
 gem 'signet-rails'
+gem 'imdb_party'
+gem 'font-awesome-rails'
+gem 'cancan'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
@@ -28,6 +31,9 @@ group :development do
   gem 'rb-fsevent', :require=>false
   gem 'rb-inotify', :require=>false
 end
+group :mac do
+  gem 'growl'
+end
 group :development, :test do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
@@ -41,4 +47,6 @@ group :test do
   gem 'shoulda-matchers'
   gem 'database_cleaner', '1.0.1'
   gem 'email_spec'
+  gem 'selenium-webdriver'
+  gem 'capybara-webkit'
 end
