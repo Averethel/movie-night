@@ -1,4 +1,6 @@
 class MoviesController < ApplicationController
+  skip_before_filter :reset_session, only: [:create]
+
   def index
     @movies = Movie.all
   end

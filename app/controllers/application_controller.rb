@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   helper_method :current_user, :logged_in?
+  before_filter :reset_session
 
   def current_user
     u = nil
@@ -19,5 +20,11 @@ class ApplicationController < ActionController::Base
 
   def logged_in?
     !!current_user
+  end
+
+private
+
+  def reset_session
+    session[:movie_step] = nil
   end
 end
