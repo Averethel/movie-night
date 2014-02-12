@@ -62,9 +62,9 @@
       .pull-left= image_tag movie.user.avatar, class: ["img-circle"], size: "25x25"
 
   %td
-    = link_to "#movie-info-#{movie.id}", class: "btn btn-primary btn-sm", data: { toggle: "modal" } do
-      More
-      %i.fa.fa-caret-right
-    = link_to movie.imdb_link, class: "btn btn-primary btn-sm", target: "_blank" do
+    = link_to imdb_link_for(movie.imdb_id), class: ["btn", "btn-default", "btn-sm"], target: "_blank" do
       IMDB
-      %i.fa.fa-caret-right
+      %i.fa.fa-external-link
+    = link_to "#movie-info-#{movie.id}", class: ["btn", "btn-primary" ,"btn-sm"], data: { toggle: "modal" } do
+      More
+      %i.fa.fa-toggle-up
