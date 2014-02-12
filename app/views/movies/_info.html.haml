@@ -1,0 +1,52 @@
+.modal.fade{ id: "movie-info-#{movie.id}", tabindex: "-1", role: "dialog", aria: { labelledby: "#{movie.title}", hidden: "true" }}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{ type: "button", data: { dismiss: "modal" }, aria: { hidden: "true" }}
+          &times
+        %h4.modal-title{ id: "#{movie.title}" }
+          = "#{movie.title} info"
+      .modal-body
+        %ul.nav.nav-tabs.nav-justified
+          %li.active=link_to 'Info', "#movie-#{movie.id}-info", data: { toggle: "tab" }
+          %li= link_to 'Trailer', "#movie-#{movie.id}-trailer", data: { toggle: "tab" }
+
+        .tab-content
+          .tab-pane.active{ id: "movie-#{movie.id}-info" }
+            .row
+              .col-md-4
+                = image_tag movie.poster_url
+              .col-md-8
+                .row
+                  .col-md-2
+                    %strong= "Title:"
+                  .col-md-10= movie.title
+
+                .row
+                  .col-md-2
+                    %strong= "Year:"
+                  .col-md-10= movie.year
+
+                .row
+                  .col-md-2
+                    %strong= "Tagline:"
+                  .col-md-10= movie.tagline
+
+                .row
+                  .col-md-2
+                    %strong= "Plot:"
+                  .col-md-10= movie.plot
+
+                .row
+                  .col-md-2
+                    %strong= "Genres:"
+                  .col-md-10= movie.genres.join(", ")
+
+          .tab-pane{ id: "movie-#{movie.id}-trailer" }
+            .text-center
+              %video{ controls: true }
+                %source{ src: movie.trailer_url }
+
+      .modal-footer
+        %button.btn.btn-default{ type: "button", data: { dismiss: "modal" }}
+          OK
