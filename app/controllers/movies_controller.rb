@@ -1,16 +1,16 @@
 class MoviesController < ApplicationController
+  load_and_authorize_resource
   skip_before_filter :reset_session, only: [:create]
 
   def index
-    @movies = Movie.all
+    # @movies = Movie.all
   end
 
   def new
-    @movie = Movie.new
+    # @movie = Movie.new
   end
 
   def create
-    @movie = Movie.new movie_params
     @movie.current_step = session[:movie_step]
 
     save_or_next_step
@@ -44,4 +44,7 @@ private
     end
   end
 
+  def prepare_resource
+    @movie = Movie.new movie_params
+  end
 end

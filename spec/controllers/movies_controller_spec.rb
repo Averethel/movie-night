@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe MoviesController do
+  before :each do
+    MoviesController.any_instance.stub(:current_user).and_return(build(:user))
+  end
+
   describe "GET index" do
     before :each do
       @movie1 = create(:movie)
