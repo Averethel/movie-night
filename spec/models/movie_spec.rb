@@ -1,8 +1,6 @@
 require 'spec_helper'
 
 describe Movie do
-  it { should validate_presence_of :imdb_id }
-
   let(:imdb_id) { "tt0468569" }
   let(:imdb_movie) { double(ImdbParty::Movie,
       imdb_id: imdb_id,
@@ -34,8 +32,38 @@ describe Movie do
     }
   }
 
+  its(:steps){ should eq(["set_title", "choose_from_imdb"])}
+
+  context "(first step)" do
+    it { should validate_presence_of :title }
+
+    its(:current_step){ should eq("set_title") }
+    its(:next_step){ should eq("choose_from_imdb") }
+    its(:previous_step){ should be_nil }
+    it { should be_first_step }
+    it { should_not be_last_step }
+  end
+
+  context "(second step)" do
+    before :each do
+      subject.next_step
+    end
+
+    it { should validate_presence_of :imdb_id }
+    it {
+      Movie.any_instance.stub(:get_data_from_imdb).and_return(:imdb_movie)
+      should validate_uniqueness_of :imdb_id
+    }
+
+    its(:current_step){ should eq("choose_from_imdb") }
+    its(:next_step){ should be_nil }
+    its(:previous_step){ should eq("set_title") }
+    it { should_not be_first_step }
+    it { should be_last_step }
+  end
+
   describe '#imdb_movie_to_attributes' do
-    let(:movie) { build(:movie, imdb_id: imdb_id ) }
+    let(:movie) { build(:movie, imdb_id: imdb_id, title: nil ) }
 
     subject { movie.send(:imdb_movie_to_attributes, imdb_movie) }
 
@@ -49,7 +77,7 @@ describe Movie do
   end
 
   describe '#get_data_from_imdb' do
-    subject { build(:movie, imdb_id: imdb_id ) }
+    subject { build(:movie, imdb_id: imdb_id, title: nil ) }
 
     before :each do
       IMDB.should_receive(:find_movie_by_id).with(imdb_id).once.and_return(imdb_movie)
@@ -72,7 +100,20 @@ describe Movie do
     end
 
     it "is called on save" do
+      subject.next_step
       subject.save
+    end
+  end
+
+  describe '#imdb_link' do
+    subject { build(:movie) }
+
+    it "generates link to imdb page" do
+      expect(subject.imdb_link).to match /^http:\/\/www.imdb.com\/title\//
+    end
+
+    it "uses imdb id in the link" do
+      expect(subject.imdb_link).to include(subject.imdb_id)
     end
   end
 end

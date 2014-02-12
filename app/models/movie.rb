@@ -3,9 +3,37 @@ class Movie < ActiveRecord::Base
 
   serialize :genres, Array
 
-  validates :imdb_id, presence: true, uniqueness: true
+  validates :title, presence: :true, if: ->(m){ m.current_step == 'set_title' }
+  validates :imdb_id, presence: true, if: ->(m){ m.current_step == 'choose_from_imdb' }
+  validates :imdb_id, uniqueness: true, if: ->(m){ m.imdb_id.present? }
 
-  before_save :get_data_from_imdb
+  before_save :get_data_from_imdb, if: ->(m){ m.title.nil? }
+
+  attr_writer :current_step
+
+  def current_step
+    @current_step || steps.first
+  end
+
+  def steps
+    %w[set_title choose_from_imdb]
+  end
+
+  def next_step
+    self.current_step = steps[steps.index(current_step)+1] unless last_step?
+  end
+
+  def previous_step
+    self.current_step = steps[steps.index(current_step)-1] unless first_step?
+  end
+
+  def first_step?
+    current_step == steps.first
+  end
+
+  def last_step?
+    current_step == steps.last
+  end
 
   def imdb_link
     "http://www.imdb.com/title/#{self.imdb_id}/"
